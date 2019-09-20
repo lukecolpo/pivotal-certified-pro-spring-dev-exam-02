@@ -1,0 +1,27 @@
+{
+  "groups": [
+    {
+      "name": "r2dbc",
+      "type": "org.baeldung.examples.r2dbc.R2DBCConfigurationProperties",
+      "sourceType": "org.baeldung.examples.r2dbc.R2DBCConfigurationProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "r2dbc.password",
+      "type": "java.lang.String",
+      "sourceType": "org.baeldung.examples.r2dbc.R2DBCConfigurationProperties"
+    },
+    {
+      "name": "r2dbc.url",
+      "type": "java.lang.String",
+      "sourceType": "org.baeldung.examples.r2dbc.R2DBCConfigurationProperties"
+    },
+    {
+      "name": "r2dbc.user",
+      "type": "java.lang.String",
+      "sourceType": "org.baeldung.examples.r2dbc.R2DBCConfigurationProperties"
+    }
+  ],
+  "hints": []
+}

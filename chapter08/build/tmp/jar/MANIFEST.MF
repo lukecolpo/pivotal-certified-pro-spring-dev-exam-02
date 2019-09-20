@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Created-By: 11.0.3
+Specification-Title: Pivotal Certified Professional Spring Developer Exa
+ m - Chapter 8
+Implementation-Version: property(class java.lang.String, provider(?))
+Class-Path: 
+
