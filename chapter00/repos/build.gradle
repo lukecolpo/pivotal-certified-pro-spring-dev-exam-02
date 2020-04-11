@@ -3,9 +3,17 @@ plugins {
 }
 
 ext.moduleName = 'com.apress.cems.repos'
+repositories {
+    mavenCentral()
+    //Add this repo
+    maven {
+        url "http://nexus.saas.hand-china.com/content/repositories/rdc/"
+    }
+}
 
 dependencies {
     compile project(':chapter00:dao')
+    compile group: 'com.oracle', name: 'ojdbc7', version: '12.1.0.2'
     compile misc.lang3, misc.ojdbc, misc.slf4j, spring.jdbc, spring.contextSupport
     compile (misc.logback) {
         exclude group: "javax.activation", module: "activation"

@@ -1,0 +1,79 @@
+Dependency Injection
+    The relationships between components are established during design phase, and linked
+
+Before: OG Java EE
+    Connections required boilerplate code following design patterns
+    In spring, dependency resolution is delegated to an external service that injects dependencies
+    Dependent component is not allowed to call the injector service and has very little to say when it comes to the
+        dependencies that will be injected
+        "Don't call us, we'll call you!"
+
+Inversion of Control:
+    "Inversion of Control is a common characteristic of frameworks that facilitate injection of dependencies. And
+        the basic idea of the dependency injection pattern is to have a separate object that injects dependencies with
+        the required behavior based on an interface contract"
+
+Beans
+    Plain Old Java Objects that are created, assembled (dependencies injected), initialized, and managed by the
+        Spring IOC container and located in the Spring application context.
+    Order of these operations and relationships between objects is configured by:
+        XML Files or
+        Annotations
+    Convention over Configuration
+        Bc 90% of applications written t     he same way - Spring Boot
+
+Traditional Application Development
+    POJOS - Each with a single responsibility
+    DAO(Repositories) - Manage databases
+        Follow "EntityRepo" naming convention
+        Represent an interface that defines method to provide behavior for that entity type
+        Extend a common interface declaring common methods to be implemented for any type of entity
+            Saving, Searching by ID, Deleting
+        Repo' inherit from the AbstractRepo
+        Example: POJO Practice
+            StubImplementation <- Repos Interface <- Abstract Repos Interface
+            Stub Classes store data created by user in a map data structure called records with ID based on size of the map
+            StubAbstractRepo class
+
+    Service Layer
+        Classes modify entity objects before being passed on to the repositories for persisting the changes
+            to the storage support (database)
+        Business Logic
+        Each service class implements an interface that defines the methods it must implement to provide the desired behavior
+        Each class uses one or more repository fields to manage entity objects
+            Complex services can be defined that can use multiple entity types to perform complex tasks.
+        Example: POJO Practice
+            In a production environment, service classes need to be instantiated and a repo instance must be set so data
+                can be managed properly.
+            Pieces need to be isolated, and integrated with simplified implementations.
+                SimpleOpsService + StubDetectiveRepo vs SimpleOpsService + StubDetectiveRepo
+                Both implement same interface
+        Creation of SimpleOpsService requires three steps:
+            Instantiate and Initialize Repo Instance: DetectiveRepo detectiveRepo = new JDBCDetectiveRepo(...);
+            Instantiate the Service Class: OperationsService service = new SimpleOpsService();
+            Inject the Dependency: service.setDetectiveRepo(detectiveRepo);
+        Test Environment Example:
+            public class StubDetectiveRepo extends StubAbstractRepo<Detective> implements DetectiveRepo{
+                //implementation not relevant at this point
+            }
+            DetectiveRepo detectiveRepo = new StubDetectiveRepo(...);
+            OperationsService service = new SimpleOpsService();
+            service.setDetectiveRepo(detectiveRepo);
+        Spring makes assembling these components a very easy job. Swapping them is practical
+    Assignment: createResponse class needs an implementation
+        1. Retrieve Detective instance using detectiveRepo
+        2. Save the Evidence instance collection using evidenceRepo and retrieve Storage instances using storageRepo
+        3. Instantiate CriminalCase instance
+        4. Populate CriminalCase instance
+            a. Set the shortDescription property
+            b. Set the caseType property
+            c. Set the leadInvestigator property to the detective instance.
+            d. Save the CriminalCase instance using the CriminalCaseRepo
+            e. Add all Evidence instances to the CriminalCase instance
+            f. Save all Evidence instances using the evidenceRepo
+
+
+
+
+
+

@@ -1,0 +1,61 @@
+Spring Exam Breakdown
+    Container (20%)
+    AOP (8%)
+    JDBC (4%)
+    Transactions (8%)
+    MVC (8%)
+    Security (6%)
+    Rest (6%)
+    JPA Spring Data (4%)
+    Testing (4%)
+    Boot Into (8%)
+    Boot Autoconfig (8%)
+    Boot Actuator (8%)
+    Boot Testing (8%)
+Passing Score: 76% or 38 Answers
+
+Project Sample: Criminal Evidence Management System
+    - VIEWER: The user can query the evidence database to retrieve information.
+    - DETECTIVE: The user can submit evidence, retrieve it for analysis, or return it to the evidence locker.
+    - ADMIN: An account with special privileges that can manage other users' activities on the evidence system.
+Evidence has to be linked to a case.
+A case usually has multiple evidence items linked to it.
+Every time a piece of evidence is submitted, retrieved for analysis or returned, a track entry is created that contains
+    the detective accessing the evidence and the reason for them to do so.
+A detective can be a lead on a case investigation, but can also be an investigator for another case.
+A detective can work on multiple cases at once.
+A detective can have different ranks:
+    - TRAINEE: No access to the evidence system
+    - JUNIOR: Read access to the evidence system
+    - SENIOR: Write access to the evidence system
+    - INSPECTOR: Write access to the evidence system and read access to the personnel system
+    - CHIEF_INSPECTOR: Write access to the evidence system and personnel system
+Cases can be classified based on their severity as follows:
+    - INFRACTION: The smallest of crimes (community service and/or a fine)
+    - MISDEMEANOR: A crime punishable with incarceration for one year or less
+    - FELONY: The most serious crimes
+Cases can be classified by the investigation status as follows:
+    - SUBMITTED: Recently introduced into the system
+    - UNDER_INVESTIGATION: The evidence is being collected; investigation in process
+    - IN_COURT: All evidence is submitted, conclusions have been drawn, people have been arrested, and now the lawyers
+        their thing in court.
+    - CLOSED: All evidence is archived, the case has been solved; people have been sentenced.
+    - DISMISSED: An invalid case that required no investigation.
+    - COLD: A case that was in UNDER_INVESTIGATION state for more than 10 years
+When a case is closed, all evidence is archived
+Evidence is stored in different storage locations
+The IntelliJ IDEA Ultimate edition can generate a diagram with the relationship between the classes, but also JPA
+    specific relations between entity classes.
+
+Architecture:
+WEB <> SERVICES <> {DAO(JPA or JDBC) + CORE(Entities + Utility)} <> Database
+
+Client - Send Input or Request Data
+    Request Dispatcher
+        Controller - getData or processData
+            Service - getData or saveData
+                DAO Handler
+            Service - sendResults
+        Controller - response
+    Request Dispatcher
+Client - Receive data
